@@ -17,12 +17,15 @@
     }
 </style>
 
-<div #noteCanvas class="svg-wrap">
+<div #noteCanvas class="svg-wrap" (click)="clicked($event)">
     <svg 
-         preserveAspectRatio="xMinYMin meet"
+         
          xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xml:space="preserve">
-        <line *ngFor="let y of ys" [attr.x1]="0" [attr.y1]="y" [attr.x2]="2000" [attr.y2]="y" style="stroke:rgb(0,0,0);stroke-width:4"/>
+        <line *ngFor="let dim of dimensions" [attr.x1]="noteX - dim[1]" [attr.y1]="dim[0]" [attr.x2]="noteX + dim[1]" [attr.y2]="dim[0]" style="stroke:rgb(0,0,0);stroke-width:4"/>
+                
+        <ellipse [attr.cx]="noteX" [attr.cy]="noteY" [attr.rx]="noteRX" [attr.ry]="noteRY" style="fill: #000000;" />
+
     </svg>
 </div>

@@ -8,22 +8,69 @@
 
 export class NoteCanvas {
 
-    ys = [0, 400]
+    dimensions: any;
+    noteX = 0
+    noteY = 0
+    h = 0
+    noteRX = 0
+    noteRY = 0
 
     @ViewChild("noteCanvas") noteCanvas: ElementRef;
 
     constructor() {
-
+        this.h = 0
+        this.dimensions = []
     }
 
     ngAfterViewInit() {
         console.log(this.noteCanvas.nativeElement.scrollHeight)
 
-        innerHeight = this.noteCanvas.nativeElement.scrollHeight
+        let h = this.noteCanvas.nativeElement.scrollHeight
 
-        this.ys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (x) { return x * innerHeight / 9 + 15} )
+        this.noteX = this.noteCanvas.nativeElement.scrollWidth / 2
+
+        this.dimensions = this.range(0, 9, 1).map(function (x) { return [x * h / 9 + h / 18 , (x < 2 || x > 6) ? 50 : 2000]})
+
+        this.h = h
 
     }
-    
 
-}
+    clicked(event) {
+        console.log(event.layerX)
+        console.info(event.layerY)
+        this.noteRY = this.h / 18
+        this.noteRX = this.h / 18.
+        this.noteX = event.layerX
+        this.noteY = this.snapTo(event.layerY, this.h)
+
+
+    }
+
+    snapTo(noteY, h) {
+        var distances = []
+        for (var y of this.range(0, 9, .5).map(function (x) { return x * h / 9 + h / 18 })) {
+            distances.push([Math.abs(noteY + this.h / 36 - y), y])
+        }
+
+        distances.sort(function (a, b) { return a[0] - b[0] })
+        console.dir(distances)
+
+        return distances[0][1]
+
+    }
+
+    range(start, stop, step) {
+
+        if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+            return [];
+        }
+
+        var result = [];
+        for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
+            result.push(i);
+        }
+
+        return result;
+
+    }
+}  
