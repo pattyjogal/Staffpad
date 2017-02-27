@@ -1,0 +1,28 @@
+﻿<style>
+    .svg-wrap {
+        height:100%;
+        width: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+
+    svg {
+        height: 100%;
+        display:block;
+        width: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+</style>
+
+<div #noteCanvas class="svg-wrap">
+    <svg 
+         preserveAspectRatio="xMinYMin meet"
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xml:space="preserve">
+        <line *ngFor="let y of ys" [attr.x1]="0" [attr.y1]="y" [attr.x2]="2000" [attr.y2]="y" style="stroke:rgb(0,0,0);stroke-width:4"/>
+    </svg>
+</div>
