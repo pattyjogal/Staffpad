@@ -24,3 +24,7 @@ And start the local server with
     $ ionic serve
     
 An address should pop up, like `localhost:8100`. You can visit it from your browser to see the app! That's it!
+
+## Notes
+
+I've included the Solution files from Visual Studio, if you so choose to develop in there. They are non critical, and do not need to be included. Feel free to delete them at any time.
